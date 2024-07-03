@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 모든 설정을 자바 코드로부터 분리, 외부화 한다 또는 annotation을 사용해 자바코드 내에서 DI 설정을 할 수도 있다 -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="dataDaoImpl" class="model.DataDaoImpl" />
+
+	<!-- DI - 제어의 역전(IoC) -->
+	<!-- 의존성 주입 - 생성자 주입 constructor injection -->
+	<!-- 1. 기본 생성자 호출 -->
+	<!-- <bean id="serviceImpl" class="controller.ProcessServiceImpl" /> -->
+
+
+	<!-- 2. 매개변수 1개인 생성자 호출 -->
+	<bean id="serviceImpl" class="controller.ProcessServiceImpl">
+		<constructor-arg>
+			<ref bean="dataDaoImpl" />
+		</constructor-arg>
+	</bean>
+	
+	<!-- 
+	constructor-arg : 생성자를 통해 객체 생성할 경우 생성자 값을 넣어주기 위해 사용
+	name : 생성자의 매개변수 이름 설정
+	ref : 생성자 파라미터가 참조 타입일 경우 
+	value : 생성자 파라미터가 데이터 타입일 경우 
+	-->
+
+	
+</beans>
