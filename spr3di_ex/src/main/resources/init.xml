@@ -4,12 +4,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!-- 파라미터가 1개인 생성자 호출 -->
+	<!-- 싱글톤~!~!~! -->
 	<bean class="pack.controller.MyImpl" id="myImpl">
 		<constructor-arg>
 			<ref bean="sangpumImpl"/>
 		</constructor-arg>
 	</bean>
 	
+	<!-- 파라미터가 없는 생성자 호출 -->
 	<bean class="pack.model.SangpumImpl" id="sangpumImpl" />
 
 </beans>
