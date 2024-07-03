@@ -1,5 +1,7 @@
 package pack.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import pack.model.SangpumImpl;
@@ -8,7 +10,8 @@ import pack.model.SangpumInter;
 public class MyImpl implements MyInter {
 	private SangpumInter inter; // SangpumInter를 구현한 여러 클래스를 다 쓰고 싶다
 	// private SangpumImpl sangpumImpl; // 이렇게도 가능은 하지만 SangpumImpl 객체만 사용할 수 있다
-	private String[] result;
+	//private String[] result;
+	private HashMap<String, String> result;
 	
 	// DI - constructor injection
 	public MyImpl(SangpumInter inter) { // SangpumInter 구현한 여러 클래스 중 어떤 걸 쓸지는 생성자 통해 들어온다
@@ -41,12 +44,34 @@ public class MyImpl implements MyInter {
 
 	@Override
 	public void showData() {
+		/*
 		StringBuilder sb = new StringBuilder();
 		String[] units = {"상품명", "가격"};
 		sb.append(units[0] + " : " + result[0] + ", ");
 		sb.append(units[1] + " : " + result[1]);
 		
 		System.out.println(sb.toString());
+		*/
+		
+		
+		// Map 출력하기
+		// 방법 00
+		//System.out.println(result);
+		
+		// 방법 01 : entrySet()
+		for (Map.Entry<String, String> entry : result.entrySet()) {
+			System.out.print(entry.getKey() + " : " + entry.getValue() + " ");
+		}
+		
+		System.out.println();
+		
+		
+		// 방법 02 : keySet()
+		for (String key : result.keySet()) {
+			String value = result.get(key);
+			System.out.print(key + " : " + value + " ");
+		}
+		
 	}
 
 }
