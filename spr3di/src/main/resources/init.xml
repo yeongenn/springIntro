@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- DI -->
+	<!-- constructor injection 연습 -->
+	<bean id="myProcess" class="pack.controller.MyProcess">
+		<constructor-arg>			
+			<!-- bean의 id로도 쓸 수 있고 name으로도 쓸 수 있다 -->
+			<!-- <ref bean="moneyCalc"/> -->
+			<ref bean="kbs" />
+		</constructor-arg>
+	</bean>
+
+	<!-- bean의 name은 여러개 부여 가능 -->
+	<bean id="moneyCalc" name="kbs, mbc, sbs" class="pack.model.MoneyCalc" />
+
+</beans>
