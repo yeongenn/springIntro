@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 
+	bean scope
+	기본값은 singleton
+	prototype으로 명시해주면 객체가 매번 생성
+	-->
+	
+	<bean class="pack.controller.MessageImpl" id="messageImpl" scope="singleton">
+		 
+		<!-- constructor injection -->
+		<constructor-arg type="java.lang.String">
+			<value>안녕하세요</value>
+		</constructor-arg>
+		<constructor-arg type="String">
+			<value>반가워욥</value>
+		</constructor-arg>
+		<constructor-arg type="int">
+			<value>2024</value>
+		</constructor-arg>
+		<constructor-arg type="pack.model.MyInfoInter" ref="me" />
+
+		
+		<!-- index로 매개변수 구분 -->
+		<!-- 
+		<constructor-arg index="0" value="안녕하세요" />
+		<constructor-arg index="1" value="반가워욥" />
+		 -->
+		 
+		 
+		<!-- name으로 매개변수 구분 -->
+		<!-- 		
+		<constructor-arg name="m1" value="안녕하세요" />
+		<constructor-arg name="m2" value="메롱" />
+		 -->
+		 
+		 <!-- setter injection -->
+		 <property name="spec" value="자바 개발 전문" />
+		 <property name="fileInter" ref="fileImpl" />	 
+		 
+	</bean>
+	
+	<bean class="pack.model.MyInfo" id="myInfo" name="my, me" />
+	<bean class="pack.other.OutFileImpl" id="fileImpl">
+		<property name="filePath" value="c:/work2/message.txt" />
+	</bean>
+
+
+</beans>
