@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd">
+							
+	<!-- DI - setter injection -->
+	
+	<!-- 방법 1) 일반적인 setter 사용
+		멤버필드에 직접 값 넘기는 것 X
+		setter에 값 넘기기 value - 데이터 타입
+		setter에 값 넘기기 ref - 참조형 타입 -->
+	<!-- 
+	<bean class="pack.MyProcess" id="myProcess">			
+		<property name="nai" value="25" />
+		<property name="name" value="가나다" />		
+		
+		<property name="showData" ref="showData" />		
+	</bean> 	
+	
+	<bean class="pack.ShowData" id="showData" />
+	 -->
+	 
+	 
+	<!-- 방법 2) 일반적인 setter 사용 -->
+	<!-- 
+	<bean class="pack.MyProcess" id="myProcess">
+		<property name="nai">
+			<value>26</value>
+		</property>
+		<property name="name">
+			<value>도레미</value>
+		</property>
+		<property name="showData">
+			<bean class="pack.ShowData"/>
+		</property>
+	</bean>
+	 -->
+	 
+	 <!-- 방법 3) xml namespace 사용 -->
+	 <!-- 헤드부분에  xmlns:p="http://www.springframework.org/schema/p" 추가 -->
+	 <bean class="pack.MyProcess" id="myProcess"
+	 	p:nai="27"
+	 	p:name="abc"
+	 	p:showData-ref="showData"/>
+	 
+	 <bean class="pack.ShowData" id="showData" />
+	 
+	
+</beans>
