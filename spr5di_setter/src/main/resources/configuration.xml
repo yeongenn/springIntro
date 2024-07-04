@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<!-- setter injection -->
+	
+	<bean class="pack.OurProcess" id="our">
+		<property name="name" value="ye" />
+		<property name="su" value="7" />
+		<property name="gugudan" ref="gugu" />
+	</bean>
+			
+	<bean class="pack.Gugudan" id="gugu" />
+	
+</beans>
