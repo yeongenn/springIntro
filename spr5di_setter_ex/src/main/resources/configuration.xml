@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<!-- 방법 1) -->
+	<!-- 
+	<bean class="pack.controller.MyImpl" id="myImpl">
+		<property name="inter" ref="sangpumImpl" />
+	</bean>
+	<bean class="pack.model.SangpumImpl" id="sangpumImpl" />
+	 -->
+	 
+	<!-- 방법 2) -->
+	<!-- 
+	<bean class="pack.controller.MyImpl" id="myImpl">
+		<property name="inter">
+			<bean class="pack.model.SangpumImpl" />
+		</property>
+	</bean>
+	 -->
+	 
+	 
+	<!-- 방법 3) namespace -->
+	<!-- 
+	p : property
+	c : constructor-arg / http://www.springframework.org/schema/c
+	 -->
+	<bean class="pack.controller.MyImpl" id="myImpl" 
+		p:inter-ref="sangpumImpl" />
+		
+	<bean class="pack.model.SangpumImpl" id="sangpumImpl" />
+	
+
+</beans>
