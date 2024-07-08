@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace로 aop가 들어와있음~ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd">		
+		
+		<!-- annotation 사용~! -->
+		<context:component-scan base-package="pack" />
+		
+		 
+		 <!-- annotation 사용할 거라
+		 밑에 정보들은 따로 클래스에서 선언 -->
+		 <!-- 
+		 <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+		 	<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		 	<property name="url" value="jdbc:mariadb://localhost:3306/test" />
+		 	<property name="username" value="root" />
+		 	<property name="password" value="123" />
+		 </bean>
+		  -->
+
+
+</beans>
