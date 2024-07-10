@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 
 import pack.mybatis.SqlMapConfig;
 
 @Repository
+@ComponentScan(basePackages = "pack")
 public class SangpumImpl implements SangpumInter {
 	private SqlSessionFactory factory = SqlMapConfig.getSqlSession();
 	
