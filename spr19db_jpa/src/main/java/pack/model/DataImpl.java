@@ -26,22 +26,42 @@ public class DataImpl implements DataInterface {
 		
 		List<MemDto> list = null;
 
-		//
-		System.out.println("전체 자료 읽기 ---");
-		list = findAll(em, MemDto.class);
+		
+		System.out.println("전체 자료 읽기 (JPQL 사용) ---");
+
+		/*
+		list = findAll(em, MemDto.class); // 메서드 만들어서 가져와도 되고
 		for(MemDto m : list) {
 			System.out.println(m.getNumber() + " "
 								+ m.getName() + " "
 								+ m.getAddr());
 		}
+		*/
+		
+		list = em.createQuery("select m from MemDto m", MemDto.class)
+					.getResultList(); // 이렇게 바로 적어줘도 된다
+		
+		/*
+		select m from MemDto m <- RDBMS에 상관없이 공통적
+		위 쿼리문을 Hibernate가 DB dialect를 확인하고 DB에 맞게 쿼리문을 변환 ->
+		select memdto0_.num as num1_0_, memdto0_.addr as addr2_0_, memdto0_.name as name3_0_ from mem memdto0_
+		*/
+		
 		return list;
 	}
 	
 	public<T> List<T> findAll(EntityManager em, Class<T> cls){
 		// JPQL
 		// 'e'는 테이블 별칭
-		return em.createQuery("select e from " + 
+		// 반환타입이 명확한 경우 TypeQuery
+		// TypedQuery<MemDto> tquery = em.createQuery("[sql문]", [반환타입(클래스명).class]);
+		// 그렇지 않으면 Query
+		// Query<MemDto> query = em.createQuery("[sql문]");
+		return em.createQuery("select m from " + 
 								cls.getSimpleName() + 
-								" e", cls).getResultList();
+								" m", cls).getResultList();
+		
+
+		
 	}
 }
