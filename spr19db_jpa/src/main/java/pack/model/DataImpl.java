@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -57,26 +58,42 @@ public class DataImpl implements DataInterface {
 //			// delete from mem where num=?
 						
 			
-			System.out.println("부분 자료 읽기(단일 entity : find() 사용) ---");
+			System.out.println("\n부분 자료 읽기(단일 자료 : find() 사용) ---");
 			// find(Class<T> entityClass, Object primaryKey);
 			MemDto memDto = em.find(MemDto.class, 1); // 
 			System.out.println(memDto.getNumber() + " "
 					+ memDto.getName() + " "
 					+ memDto.getAddr());
 			
-			System.out.println("전체 자료 읽기 (JPQL 사용) ---");
+			System.out.println("\n부분 자료 읽기(복수 자료) ---");
+			List<MemDto> listPart = findByAdder(em, "강남");
+			for(MemDto m : listPart) {
+				System.out.println(m.getNumber() + " "
+									+ m.getName() + " "
+									+ m.getAddr());
+			}
+			// Hibernate: /* select m from MemDto m where m.addr like : s */ 
+			// select memdto0_.num as num1_0_, memdto0_.addr as addr2_0_, memdto0_.name as name3_0_ 
+			// from mem memdto0_ where memdto0_.addr like ?
+			
+			System.out.println("\n전체 자료 읽기 (JPQL 사용) ---");
 			
 			/*
-		list = findAll(em, MemDto.class); // 메서드 만들어서 가져와도 되고
-		for(MemDto m : list) {
-			System.out.println(m.getNumber() + " "
-								+ m.getName() + " "
-								+ m.getAddr());
-		}
+			list = findAll(em, MemDto.class); // 메서드 만들어서 가져와도 되고
+			for(MemDto m : list) {
+				System.out.println(m.getNumber() + " "
+									+ m.getName() + " "
+									+ m.getAddr());
+			}
 			 */
 			
 			list = em.createQuery("select m from MemDto m", MemDto.class)
 					.getResultList(); // 이렇게 바로 적어줘도 된다
+			for(MemDto m : list) {
+				System.out.println(m.getNumber() + " "
+									+ m.getName() + " "
+									+ m.getAddr());
+			}
 			
 			/*
 		select m from MemDto m <- RDBMS에 상관없이 공통적
@@ -107,7 +124,15 @@ public class DataImpl implements DataInterface {
 								cls.getSimpleName() + 
 								" m", cls).getResultList();
 		
-
-		
+	}
+	
+	public List<MemDto> findByAdder(EntityManager em, String s){
+		// addr 필드가 특정 접두사로 시작하는 자료 읽기
+		String jpql = "select m from MemDto m where m.addr like : s"; // LIKE 조건문
+		TypedQuery<MemDto> query = em.createQuery(jpql, MemDto.class);
+		// TypedQuery<entity> query = em.createQuery(jpql, entity 클래스)
+		// JPQL을 작성하고 실행하는 역할
+		query.setParameter("s", s + "%"); // SQL의 like 연산 수행
+		return query.getResultList();
 	}
 }
