@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<pre>
+templates :
+일반 html 파일 X
+Thymeleaf 적용된 html 파일 O
+</pre>
+<hr>
+----- 첫번째 컨트롤러와 맵핑 -----<br>
+<a href="test1">컨트롤러 만나기 1 (get)</a><br>
+<a href="javascript:func();">컨트롤러 만나기 1 (post)</a><br>
+<form name="f"></form>
+<script>
+function func(){
+	f.action="test1"; 
+	f.method="post";  //POST방식
+	f.submit();
+}
+</script>
+
+<a href="test2">컨트롤러 만나기 2</a><br>
+<a href="javascript:func();">컨트롤러 만나기 2 (post)</a><br>
+<form name="f2"></form>
+<script>
+function func(){
+	f2.action="test2"; 
+	f2.method="post";  //POST방식
+	f2.submit();
+}
+</script>
+
+<a href="test3">컨트롤러 만나기 3</a><br>
+<a href="test4">컨트롤러 만나기 4</a><br>
+<hr>
+
+<form action="test5" method="post">
+	<input type="submit" value="컨트롤러 만나기 5">
+</form>
+<form action="test6" method="post">
+	<input type="submit" value="컨트롤러 만나기 6">
+</form>
+<form action="test7" method="post">
+	<input type="submit" value="컨트롤러 만나기 7">
+</form>
+<br>
+<a href="test8">Data 얻기 1</a><br>
+<a href="test8_1">Data 얻기 2</a><br>
+
+<hr>
+
+----- 두번째 컨트롤러와 맵핑 -----<br><br>
+<form action="test9" method="get">
+	<input type="submit" value="컨트롤러 만나기 9 (get)">
+</form>
+<form action="test9" method="post">
+	<input type="submit" value="컨트롤러 만나기 9 (post)">
+</form>
+
+<hr>
+
+----- 세번째 컨트롤러와 맵핑 -----<br><br>
+<a href="/java/korea">컨트롤러 만나기 10 - korea</a><br>
+<a href="/java/good">컨트롤러 만나기 10 - good</a><br>
+<a href="/java/nice">컨트롤러 만나기 10 - nice</a><br>
+<a href="/java/ok">컨트롤러 만나기 10 - ok</a><br>
+</body>
+</html>
